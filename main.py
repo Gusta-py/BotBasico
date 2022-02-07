@@ -1,4 +1,4 @@
-#pip install discord.py
+# Use pip install discord.py no terminal.
 # Para o bot funcionar normalmente, ative as intents do seu bot.
 import discord
 from discord.ext import commands

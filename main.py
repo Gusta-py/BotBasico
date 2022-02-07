@@ -125,13 +125,15 @@ async def send_hello(ctx):
 #Caso você falar a palavra "palavrão" o bot irá enviar a mensagem da linha 131 e depois apagar a mensagem que contém o "palavrão". Caso queira mudar isso, só substituir "palavrão" por outra palavra na linha 132.
 @bot.event
 async def on_message(message):
-    if message.author == bot.user:
+    if not message.guild:
         return
-    
-    if "palavrão" in message.content:
-        await message.channel.send(f"Por favor {message.author.mention}, evite palavras de alto calão !")  
-    await message.delete()
-    await bot.process_commands(message)
+    whitelist = ["", "", "", ""] #Coloque aqui os cargos em que o bot irá ignorar as palavras inadequadas. Você pode colocar quantos cargos você quiser!
+    tem = discord.utils.find(lambda r: r.name in whitelist, message.author.roles)
+    if tem: return
+    palavras = ["", "", "", ""] #Coloque aqui as palavras que o bot irá excluir, você pode botar a quantidade de mensagens que você quiser!
+    if message.content in palavras:
+        await message.channel.send(f"Por favor {message.author.mention}, evite falar palavras inadequadas!")  
+        await message.delete()
 
 # Lembrando que dá para melhorar bastante esse bot, em algum dia eu irei atualizar e melhorar algumas coisas!
 

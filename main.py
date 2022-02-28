@@ -132,6 +132,8 @@ async def on_message(message):
     if message.content in palavras:
         await message.channel.send(f"Por favor {message.author.mention}, evite falar palavras inadequadas!")  
         await message.delete()
+    await bot.process_commands(message)
+
 
 # Lembrando que dá para melhorar bastante esse bot, em algum dia eu irei atualizar e melhorar algumas coisas!
 

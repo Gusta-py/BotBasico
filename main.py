@@ -119,19 +119,19 @@ async def send_hello(ctx):
     response = f"{ranchoice}"
 
     await ctx.send(response)
-    
-#Caso você falar a palavra "palavrão" o bot irá enviar a mensagem da linha 131 e depois apagar a mensagem que contém o "palavrão". Caso queira mudar isso, só substituir "palavrão" por outra palavra na linha 132.
+  
+#Anti-Toxidade
 @bot.event
 async def on_message(message):
     if not message.guild:
         return
-    whitelist = ["", "", "", ""] #Coloque aqui os cargos em que o bot irá ignorar as palavras inadequadas. Você pode colocar quantos cargos você quiser!
+    whitelist = ["", "", ""] #Coloque aqui os cargos em que o bot irá ignorar as palavras inadequadas. Você pode colocar quantos cargos você quiser!
     tem = discord.utils.find(lambda r: r.name in whitelist, message.author.roles)
-    if tem: return
-    palavras = ["", "", "", ""] #Coloque aqui as palavras que o bot irá excluir, você pode botar a quantidade de mensagens que você quiser!
-    if message.content in palavras:
-        await message.channel.send(f"Por favor {message.author.mention}, evite falar palavras inadequadas!")  
-        await message.delete()
+    if not tem: 
+        palavras = ["", "", ""] #Coloque aqui as palavras que o bot irá excluir, você pode botar a quantidade de mensagens que você quiser! 
+        if message.content in palavras:
+            await message.channel.send(f"Por favor {message.author.mention}, evite falar palavras inapropriadas! Se continuar, poderá resultar em punição")
+            await message.delete()
     await bot.process_commands(message)
 
 
